@@ -28,6 +28,7 @@ const Header = () => {
     { name: 'Home', id: 'home' },
     { name: 'Features', id: 'features' },
     { name: 'Services', id: 'services' },
+    { name: 'Team', id: 'team' },
     { name: 'Testimonials', id: 'testimonials' },
     { name: 'Contact', id: 'contact' },
   ];
@@ -40,31 +41,39 @@ const Header = () => {
         isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3 md:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-3"
+            className="flex items-center space-x-2 md:space-x-3"
           >
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">FL</span>
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg md:text-xl">FL</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-800">Friends Link</h1>
-              <p className="text-sm text-gray-600">Solutions</p>
+              <h1 className={`text-lg md:text-xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
+                Friends Link
+              </h1>
+              <p className={`text-xs md:text-sm ${isScrolled ? 'text-gray-600' : 'text-gray-200'}`}>
+                Solutions
+              </p>
             </div>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-6 lg:space-x-8">
             {menuItems.map((item) => (
               <motion.button
                 key={item.id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                className={`font-medium transition-colors text-sm lg:text-base ${
+                  isScrolled 
+                    ? 'text-gray-700 hover:text-blue-600' 
+                    : 'text-white hover:text-blue-300'
+                }`}
               >
                 {item.name}
               </motion.button>
@@ -73,10 +82,14 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-lg transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? (
+              <X size={24} className={isScrolled ? 'text-gray-700' : 'text-white'} />
+            ) : (
+              <Menu size={24} className={isScrolled ? 'text-gray-700' : 'text-white'} />
+            )}
           </button>
         </div>
 
@@ -86,13 +99,13 @@ const Header = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden mt-4 bg-white rounded-lg shadow-lg p-4"
+            className="md:hidden mt-4 bg-white rounded-lg shadow-lg p-4 mx-2"
           >
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded transition-colors"
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors text-sm"
               >
                 {item.name}
               </button>

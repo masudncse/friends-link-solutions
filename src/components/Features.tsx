@@ -84,17 +84,19 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="py-20 bg-gray-50">
+    <section id="features" className="py-12 md:py-16 lg:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">আমাদের সেবাসমূহ</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 md:mb-4">
+            আমাদের সেবাসমূহ
+          </h2>
+          <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             আমরা বিভিন্ন ধরনের প্রফেশনাল সেবা প্রদান করি যা আপনার ব্যবসা এবং ব্যক্তিগত প্রয়োজন মেটাতে সাহায্য করবে
           </p>
         </motion.div>
@@ -104,22 +106,22 @@ const Features = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-white rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="text-blue-600 mb-4">
+              <div className="text-blue-600 mb-3 md:mb-4">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3 leading-tight">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>

@@ -61,7 +61,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
+    <section id="home" className="relative min-h-screen h-screen overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -73,13 +73,13 @@ const HeroSlider = () => {
         >
           <div className="absolute inset-0 bg-black/40" />
           
-          <div className="relative h-full flex items-center justify-center">
-            <div className="container mx-auto px-4 text-center text-white">
+          <div className="relative h-full flex items-center justify-center px-4 py-20 md:py-0">
+            <div className="container mx-auto text-center text-white max-w-6xl">
               <motion.h1
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.7 }}
-                className="text-4xl md:text-6xl font-bold mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 leading-tight"
               >
                 {slides[currentSlide].title}
               </motion.h1>
@@ -88,7 +88,7 @@ const HeroSlider = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.7 }}
-                className="text-lg md:text-xl mb-8 max-w-3xl mx-auto"
+                className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 md:mb-8 max-w-4xl mx-auto leading-relaxed px-4"
               >
                 {slides[currentSlide].subtitle}
               </motion.p>
@@ -97,20 +97,20 @@ const HeroSlider = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.7, duration: 0.7 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
+                className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center px-4"
               >
                 <button
                   onClick={scrollToContact}
-                  className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto bg-white text-gray-800 px-6 md:px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 text-sm md:text-base"
                 >
-                  <Phone size={20} />
+                  <Phone size={18} className="md:w-5 md:h-5" />
                   Contact Us
                 </button>
                 <button
                   onClick={scrollToContact}
-                  className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-colors flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto border-2 border-white text-white px-6 md:px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-colors flex items-center justify-center gap-2 text-sm md:text-base"
                 >
-                  <Mail size={20} />
+                  <Mail size={18} className="md:w-5 md:h-5" />
                   Get Quote
                 </button>
               </motion.div>
@@ -119,28 +119,28 @@ const HeroSlider = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons - Hidden on mobile */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors"
+        className="hidden md:block absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 lg:p-3 rounded-full transition-colors z-10"
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft size={20} className="lg:w-6 lg:h-6" />
       </button>
       
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors"
+        className="hidden md:block absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 lg:p-3 rounded-full transition-colors z-10"
       >
-        <ChevronRight size={24} />
+        <ChevronRight size={20} className="lg:w-6 lg:h-6" />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors ${
               index === currentSlide ? 'bg-white' : 'bg-white/50'
             }`}
           />
