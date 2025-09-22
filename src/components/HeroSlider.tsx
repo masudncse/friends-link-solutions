@@ -1,0 +1,153 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Phone, Mail } from 'lucide-react';
+
+const HeroSlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      id: 1,
+      title: "TIN/BIN Registration & Services",
+      subtitle: "আমরা টিআইএন, ভ্যাট, এনবিআর এবং কোম্পানী সম্পর্কিত সকল ধরনের কনসালটেশনাল সার্ভিস দিয়ে থাকি",
+      image: "/api/placeholder/1200/600",
+      gradient: "from-blue-600 to-purple-600"
+    },
+    {
+      id: 2,
+      title: "IRC/ERC & Trade License",
+      subtitle: "ব্যবসার জন্য প্রয়োজনীয় সকল লাইসেন্স এবং রেজিস্ট্রেশন সেবা",
+      image: "/api/placeholder/1200/600",
+      gradient: "from-purple-600 to-pink-600"
+    },
+    {
+      id: 3,
+      title: "Computer & IT Services",
+      subtitle: "কম্পিউটার, ল্যাপটপ ও প্রিন্টার সার্ভিসিং এবং আইটি সাপোর্ট",
+      image: "/api/placeholder/1200/600",
+      gradient: "from-green-600 to-blue-600"
+    },
+    {
+      id: 4,
+      title: "Online Services & Solutions",
+      subtitle: "অনলাইন সেবা এবং ডিজিটাল সমাধানের জন্য আমাদের সাথে যোগাযোগ করুন",
+      image: "/api/placeholder/1200/600",
+      gradient: "from-orange-600 to-red-600"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section id="home" className="relative h-screen overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.7 }}
+          className={`absolute inset-0 bg-gradient-to-r ${slides[currentSlide].gradient}`}
+        >
+          <div className="absolute inset-0 bg-black/40" />
+          
+          <div className="relative h-full flex items-center justify-center">
+            <div className="container mx-auto px-4 text-center text-white">
+              <motion.h1
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.7 }}
+                className="text-4xl md:text-6xl font-bold mb-6"
+              >
+                {slides[currentSlide].title}
+              </motion.h1>
+              
+              <motion.p
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.7 }}
+                className="text-lg md:text-xl mb-8 max-w-3xl mx-auto"
+              >
+                {slides[currentSlide].subtitle}
+              </motion.p>
+              
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.7, duration: 0.7 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <button
+                  onClick={scrollToContact}
+                  className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Phone size={20} />
+                  Contact Us
+                </button>
+                <button
+                  onClick={scrollToContact}
+                  className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Mail size={20} />
+                  Get Quote
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors"
+      >
+        <ChevronLeft size={24} />
+      </button>
+      
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors"
+      >
+        <ChevronRight size={24} />
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentSlide ? 'bg-white' : 'bg-white/50'
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default HeroSlider;
