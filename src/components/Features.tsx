@@ -6,10 +6,8 @@ import {
   Building, 
   Globe, 
   Computer, 
-  CreditCard, 
   Shield,
   Users,
-  Zap,
   CheckCircle
 } from 'lucide-react';
 

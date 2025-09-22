@@ -5,10 +5,7 @@ import {
   Award, 
   Clock, 
   Shield, 
-  Users, 
   CheckCircle, 
-  Star,
-  TrendingUp,
   Headphones
 } from 'lucide-react';
 

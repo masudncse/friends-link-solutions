@@ -9,8 +9,7 @@ import {
   Clock, 
   Send, 
   Facebook, 
-  MessageCircle,
-  Globe
+  MessageCircle
 } from 'lucide-react';
 
 const Contact = () => {
